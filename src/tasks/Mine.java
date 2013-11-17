@@ -73,8 +73,10 @@ public class Mine extends Task {
     {
         GameObject rock = getRockToMine();
 
-        if (rock.isOnScreen()) {
-            if (rock.interact("Mine")) {
+        if (rock.isOnScreen())
+        {
+            if (rock.interact("Mine"))
+            {
                 System.out.println("Mining...");
                 Timer t = new Timer(7000);
                 while (t.isRunning() && rock.isValid()) {

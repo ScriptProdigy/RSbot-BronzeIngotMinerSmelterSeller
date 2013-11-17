@@ -15,6 +15,7 @@ public class Constants {
     public static int[] TIN_ROCK = {3245, 3038};
     public static int[] COPPER_ORE = {436, 437};
     public static int[] COPPER_ROCK = {3229, 3027};
+    public static int BRONZE_BAR = 2349;
 
     public static int FURNACE = 45310;
     public static int BANK_CHEST = 79036;
@@ -83,5 +84,16 @@ public class Constants {
             new Tile(3165, 3466, 0), new Tile(3164, 3471, 0), new Tile(3164, 3476, 0),
             new Tile(3168, 3478, 0), new Tile(3173, 3476, 0) };
 
-    //public static Tile[] LUMBRIDGE_GE_TO_BANK = LUMBRIDGE_BANK_TO_GE.
+    public static Tile[] LUMBRIDGE_GE_TO_BANK = reverseArray(LUMBRIDGE_BANK_TO_GE);
+
+    public static Tile[] reverseArray(Tile[] data)
+    {
+        Tile[] reversedData = new Tile[data.length];
+        int j = data.length - 1;
+        for(int i=0; i < data.length; i++)
+        {
+            reversedData[i] = data[j--];
+        }
+        return reversedData;
+    }
 }

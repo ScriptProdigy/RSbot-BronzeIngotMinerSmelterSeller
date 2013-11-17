@@ -22,8 +22,7 @@ public class Bank extends Task {
     {
         System.out.print("Bank Contains Player: " );
         System.out.println(Constants.BANK_CHEST_AREA.contains(ctx.players.local()));
-        return Constants.BANK_CHEST_AREA.contains(ctx.players.local()) &&
-                ctx.backpack.size() > 0;
+        return Constants.BANK_CHEST_AREA.contains(ctx.players.local());
     }
 
     @Override

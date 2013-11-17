@@ -4,6 +4,8 @@ import org.powerbot.script.methods.MethodContext;
 import org.powerbot.script.wrappers.Tile;
 import org.powerbot.script.wrappers.TilePath;
 
+import javax.sound.midi.SysexMessage;
+
 /**
  * Created with IntelliJ IDEA.
  * All legal rights belong to the user below unless stated otherwise.
@@ -23,50 +25,51 @@ public class Walk extends Task {
     @Override
     public boolean activate()
     {
-        if(Constants.FURNACE_AREA.contains(ctx.players.local()) &&
-                ctx.backpack.id(Constants.COPPER_ORE).size() > 0 &&
-                ctx.backpack.id(Constants.TIN_ORE).size() > 0) {
+        int BackpackSize = ctx.backpack.select().count();
+
+        System.out.print("Backpack Size: ");
+        System.out.println(BackpackSize);
+
+        if(Path == Constants.LUMBRIDGE_MINE_TO_FURNACE)
+        {
+            System.out.println("Constants.LUMBRIDGE_MINE_TO_FURNACE");
+            if(BackpackSize < 28 || Constants.FURNACE_AREA.contains(ctx.players.local())) {
+                return false;
+            }
+            return true;
+        }
+
+        if(Path == Constants.LUMBRIDGE_BANK_TO_MINE)
+        {
+            System.out.println("Constants.LUMBRIDGE_BANK_TO_MINE");
+            if(BackpackSize > 0 || Constants.MINE_AREA.contains(ctx.players.local())) {
+                return false;
+            }
+            return true;
+        }
+
+        if(Path == Constants.LUMBRIDGE_FURNACE_TO_BANK)
+        {
+            System.out.println("Constants.LUMBRIDGE_FURNACE_TO_BANK");
+            if(Constants.FURNACE_AREA.contains(ctx.players.local()))
+            {
+                boolean CopperCount = ctx.backpack.select().id(Constants.COPPER_ORE).size() == 0;
+                boolean TinCount = ctx.backpack.select().id(Constants.TIN_ORE).size() == 0;
+                boolean BronzeCount = ctx.backpack.select().id(Constants.BRONZE_BAR).size() > 0;
+
+                return CopperCount && TinCount && BronzeCount;
+            }
             return false;
         }
 
-        if(Constants.MINE_AREA.contains(ctx.players.local())
-                && ctx.backpack.count() < 28) {
-            return false;
-        }
-
-        if(Constants.BANK_CHEST_AREA.contains(ctx.players.local())
-                && ctx.backpack.count() > 0) {
-            return false;
-        }
-        return true;
-
-        /*Boolean canWalk = ctx.players.local().getAnimation() == -1;
-
-        System.out.print("BackPack Size: ");
-        System.out.println(ctx.backpack.select().count());
-
-        if(Path == Constants.LUMBRIDGE_BANK_TO_MINE) {
-            canWalk = canWalk && ctx.backpack.select().count() == 0;
-            return canWalk;
-        }
-
-        if(Path == Constants.LUMBRIDGE_MINE_TO_FURNACE) {
-            canWalk = canWalk && ctx.backpack.select().count() == 28;
-            return canWalk;
-        }
-
-        if(Path == Constants.LUMBRIDGE_FURNACE_TO_BANK) {
-            canWalk = canWalk && ctx.backpack.select().count() == 14;
-            return canWalk;
-        }
-
-        return false;  */
+        return false;
     }
 
     @Override
     public void execute()
     {
-        System.out.println("Walking..");
+        System.out.print("Walking.. ");
+        System.out.println(Path);
         if (!ctx.movement.isRunning() && ctx.movement.getEnergyLevel() > 30){
             ctx.movement.setRunning(true);
         }

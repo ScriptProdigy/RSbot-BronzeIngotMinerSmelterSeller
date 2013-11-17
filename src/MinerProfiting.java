@@ -28,6 +28,7 @@ public class MinerProfiting extends PollingScript {
         MiningAndSmelting.add(new Bank(ctx));
 
         ArrayList<Task> GrandExchangeSelling = new ArrayList();
+        //TODO:  Implement walking to and back from GrandExchange, as well as Exchanging..
 
         BotProcesses.add(MiningAndSmelting);
         BotProcesses.add(GrandExchangeSelling);
@@ -40,22 +41,6 @@ public class MinerProfiting extends PollingScript {
 
         System.out.println("Script started");
     }
-
-    @Override
-    public void suspend() {
-        System.out.println("Script suspended");
-    }
-
-    @Override
-    public void resume() {
-        System.out.println("Script resumed");
-    }
-
-    @Override
-    public void stop() {
-        System.out.println("Script stopped");
-    }
-
 
     @Override
     public int poll() {

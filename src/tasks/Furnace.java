@@ -21,20 +21,26 @@ public class Furnace extends Task {
     @Override
     public boolean activate()
     {
-        return Constants.FURNACE_AREA.contains(ctx.players.local()) &&
-            ctx.backpack.id(Constants.COPPER_ORE).size() > 0 &&
-            ctx.backpack.id(Constants.TIN_ORE).size() > 0;
+        ctx.backpack.select();
+        boolean CopperCount = ctx.backpack.id(Constants.COPPER_ORE).size() > 0;
+        ctx.backpack.select();
+        boolean TinCount = ctx.backpack.id(Constants.TIN_ORE).size() > 0;
+
+        return CopperCount && TinCount;
     }
 
     @Override
     public void execute()
     {
-        GameObject furnace = ctx.objects.select().id(Constants.FURNACE).nearest().first().poll();
-        furnace.interact("Smelt");
-        sleep(2000, 2300);
-
-        Component Smelt = ctx.widgets.get(1371, 5);
-        Smelt.click();
-        sleep(Random.nextInt(34000, 37000));
+        if(!ctx.widgets.get(1371).isValid())
+        {
+            GameObject furnace = ctx.objects.select().id(Constants.FURNACE).nearest().first().poll();
+            furnace.interact("Smelt");
+            sleep(200, 1200);
+        } else {
+            Component Smelt = ctx.widgets.get(1371, 5);
+            Smelt.click();
+            sleep(Random.nextInt(34000, 37000));
+        }
     }
 }
