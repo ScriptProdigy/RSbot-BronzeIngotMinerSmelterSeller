@@ -12,6 +12,11 @@ import org.powerbot.script.wrappers.GameObject;
  * Time: 6:11 PM
  */
 public class Mine extends Task {
+    public static int[] TIN_ORE = {438, 439};
+    public static int[] TIN_ROCK = {3245, 3038};
+    public static int[] COPPER_ORE = {436, 437};
+    public static int[] COPPER_ROCK = {3229, 3027};
+    public static int BRONZE_BAR = 2349;
 
     public Mine(MethodContext ctx){
         super(ctx);
@@ -22,16 +27,16 @@ public class Mine extends Task {
     {
         ctx.backpack.select();
         return ctx.backpack.size() < 28
-            && Constants.MINE_AREA.contains(ctx.players.local())
-            && (!ctx.objects.select().id(Constants.COPPER_ROCK).nearest().first().isEmpty()
-                || !ctx.objects.select().id(Constants.TIN_ROCK).nearest().first().isEmpty());
+            && Walk.Movement_Area.MINE_AREA.getArea().contains(ctx.players.local())
+            && (!ctx.objects.select().id(COPPER_ROCK).nearest().first().isEmpty()
+                || !ctx.objects.select().id(TIN_ROCK).nearest().first().isEmpty());
     }
 
     private GameObject getRockToMine() {
         ctx.backpack.select();
-        int Copper_Ore_Count = ctx.backpack.id(Constants.COPPER_ORE).size();
+        int Copper_Ore_Count = ctx.backpack.id(COPPER_ORE).size();
         ctx.backpack.select();
-        int Tin_Ore_Count    = ctx.backpack.id(Constants.TIN_ORE).size();
+        int Tin_Ore_Count    = ctx.backpack.id(TIN_ORE).size();
 
         System.out.print(" Backpack size with ");
         System.out.print(Copper_Ore_Count);
@@ -42,17 +47,17 @@ public class Mine extends Task {
         GameObject rock;
         if(Tin_Ore_Count == Copper_Ore_Count)
         {
-            int[] array1and2 = new int[Constants.COPPER_ROCK.length + Constants.TIN_ROCK.length];
-            System.arraycopy(Constants.COPPER_ROCK, 0, array1and2, 0, Constants.COPPER_ROCK.length);
-            System.arraycopy(Constants.TIN_ROCK, 0, array1and2, Constants.COPPER_ROCK.length, Constants.TIN_ROCK.length);
+            int[] array1and2 = new int[COPPER_ROCK.length + TIN_ROCK.length];
+            System.arraycopy(COPPER_ROCK, 0, array1and2, 0, COPPER_ROCK.length);
+            System.arraycopy(TIN_ROCK, 0, array1and2, COPPER_ROCK.length, TIN_ROCK.length);
 
             rock = ctx.objects.select().id(array1and2).nearest().poll();
 
         } else {
-            rock = ctx.objects.select().id(Constants.COPPER_ROCK).nearest().poll();
+            rock = ctx.objects.select().id(COPPER_ROCK).nearest().poll();
 
             if(Copper_Ore_Count > Tin_Ore_Count) {
-                rock = ctx.objects.select().id(Constants.TIN_ROCK).nearest().poll();
+                rock = ctx.objects.select().id(TIN_ROCK).nearest().poll();
             }
         }
 

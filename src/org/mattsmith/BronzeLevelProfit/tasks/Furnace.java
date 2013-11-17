@@ -14,6 +14,8 @@ import org.powerbot.script.methods.MethodContext;
  */
 public class Furnace extends Task {
 
+    public int FURNACE = 45310;
+
     public Furnace(MethodContext ctx){
         super(ctx);
     }
@@ -22,9 +24,9 @@ public class Furnace extends Task {
     public boolean activate()
     {
         ctx.backpack.select();
-        boolean CopperCount = ctx.backpack.id(Constants.COPPER_ORE).size() > 0;
+        boolean CopperCount = ctx.backpack.id(Mine.COPPER_ORE).size() > 0;
         ctx.backpack.select();
-        boolean TinCount = ctx.backpack.id(Constants.TIN_ORE).size() > 0;
+        boolean TinCount = ctx.backpack.id(Mine.TIN_ORE).size() > 0;
 
         return CopperCount && TinCount;
     }
@@ -34,7 +36,7 @@ public class Furnace extends Task {
     {
         if(!ctx.widgets.get(1371).isValid())
         {
-            GameObject furnace = ctx.objects.select().id(Constants.FURNACE).nearest().first().poll();
+            GameObject furnace = ctx.objects.select().id(FURNACE).nearest().first().poll();
             furnace.interact("Smelt");
             sleep(200, 1200);
         } else {
