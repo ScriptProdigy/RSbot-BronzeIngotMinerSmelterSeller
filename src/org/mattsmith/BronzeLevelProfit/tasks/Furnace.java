@@ -1,4 +1,4 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
 import org.powerbot.script.util.Random;
 import org.powerbot.script.wrappers.Component;

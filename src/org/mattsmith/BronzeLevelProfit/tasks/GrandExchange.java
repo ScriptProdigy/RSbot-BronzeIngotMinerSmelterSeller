@@ -1,4 +1,4 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
 import org.powerbot.script.methods.MethodContext;
 
@@ -18,7 +18,7 @@ public class GrandExchange extends Task {
     @Override
     public boolean activate()
     {
-        return true;
+        return false;
     }
 
     @Override

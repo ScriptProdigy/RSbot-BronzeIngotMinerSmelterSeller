@@ -1,7 +1,9 @@
+package org.mattsmith.BronzeLevelProfit;
+
 import org.powerbot.script.Manifest;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.util.Random;
-import tasks.*;
+import org.mattsmith.BronzeLevelProfit.tasks.*;
 
 import java.util.ArrayList;
 
@@ -22,9 +24,9 @@ public class MinerProfiting extends PollingScript {
         ArrayList<Task> MiningAndSmelting = new ArrayList();
         MiningAndSmelting.add(new Walk(ctx, Constants.LUMBRIDGE_BANK_TO_MINE));
         MiningAndSmelting.add(new Mine(ctx));
-        MiningAndSmelting.add(new Walk(ctx, tasks.Constants.LUMBRIDGE_MINE_TO_FURNACE));
+        MiningAndSmelting.add(new Walk(ctx, org.mattsmith.BronzeLevelProfit.tasks.Constants.LUMBRIDGE_MINE_TO_FURNACE));
         MiningAndSmelting.add(new Furnace(ctx));
-        MiningAndSmelting.add(new Walk(ctx, tasks.Constants.LUMBRIDGE_FURNACE_TO_BANK));
+        MiningAndSmelting.add(new Walk(ctx, org.mattsmith.BronzeLevelProfit.tasks.Constants.LUMBRIDGE_FURNACE_TO_BANK));
         MiningAndSmelting.add(new Bank(ctx));
 
         ArrayList<Task> GrandExchangeSelling = new ArrayList();

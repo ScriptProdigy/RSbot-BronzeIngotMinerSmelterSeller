@@ -1,10 +1,8 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
 import org.powerbot.script.methods.MethodContext;
 import org.powerbot.script.wrappers.Tile;
 import org.powerbot.script.wrappers.TilePath;
-
-import javax.sound.midi.SysexMessage;
 
 /**
  * Created with IntelliJ IDEA.

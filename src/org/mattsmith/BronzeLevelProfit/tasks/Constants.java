@@ -1,4 +1,4 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
 import org.powerbot.script.wrappers.Area;
 import org.powerbot.script.wrappers.Tile;

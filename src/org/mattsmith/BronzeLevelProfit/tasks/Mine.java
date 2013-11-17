@@ -1,13 +1,8 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
-import com.sun.deploy.util.ArrayUtil;
 import org.powerbot.script.methods.MethodContext;
-import org.powerbot.script.util.Random;
 import org.powerbot.script.util.Timer;
 import org.powerbot.script.wrappers.GameObject;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Created with IntelliJ IDEA.

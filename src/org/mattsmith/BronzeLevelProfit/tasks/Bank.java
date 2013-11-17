@@ -1,7 +1,6 @@
-package tasks;
+package org.mattsmith.BronzeLevelProfit.tasks;
 
 import org.powerbot.script.methods.MethodContext;
-import org.powerbot.script.wrappers.Component;
 import org.powerbot.script.wrappers.GameObject;
 
 /**
