@@ -127,12 +127,8 @@ public class Walk extends Task {
     {
         int BackpackSize = ctx.backpack.select().count();
 
-        System.out.print("Backpack Size: ");
-        System.out.println(BackpackSize);
-
         if(Path == MovementPath.LUMBRIDGE_MINE_TO_FURNACE)
         {
-            System.out.println("MovementPath.LUMBRIDGE_MINE_TO_FURNACE");
             if(BackpackSize < 28 || MovementArea.FURNACE_AREA.getArea().contains(ctx.players.local())) {
                 return false;
             }
@@ -141,7 +137,6 @@ public class Walk extends Task {
 
         if(Path == MovementPath.LUMBRIDGE_BANK_TO_MINE)
         {
-            System.out.println("MovementPath.LUMBRIDGE_BANK_TO_MINE");
             if(BackpackSize > 0 || MovementArea.MINE_AREA.getArea().contains(ctx.players.local())) {
                 return false;
             }
@@ -150,7 +145,6 @@ public class Walk extends Task {
 
         if(Path == MovementPath.LUMBRIDGE_FURNACE_TO_BANK)
         {
-            System.out.println("MovementPath.LUMBRIDGE_FURNACE_TO_BANK");
             if(MovementArea.FURNACE_AREA.getArea().contains(ctx.players.local()))
             {
                 boolean CopperCount = ctx.backpack.select().id(Mine.COPPER_ORE).size() == 0;
@@ -170,6 +164,7 @@ public class Walk extends Task {
     {
         System.out.print("Walking.. ");
         System.out.println(Path.name());
+
         if (!ctx.movement.isRunning() && ctx.movement.getEnergyLevel() > 30){
             ctx.movement.setRunning(true);
         }

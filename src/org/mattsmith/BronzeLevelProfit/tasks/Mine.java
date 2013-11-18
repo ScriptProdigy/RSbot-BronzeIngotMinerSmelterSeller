@@ -32,17 +32,15 @@ public class Mine extends Task {
                 || !ctx.objects.select().id(TIN_ROCK).nearest().first().isEmpty());
     }
 
-    private GameObject getRockToMine() {
-        ctx.backpack.select();
-        int Copper_Ore_Count = ctx.backpack.id(COPPER_ORE).size();
-        ctx.backpack.select();
-        int Tin_Ore_Count    = ctx.backpack.id(TIN_ORE).size();
+    private GameObject getRockToMine()
+    {
+        int Copper_Ore_Count = ctx.backpack.select().id(COPPER_ORE).size();
+        int Tin_Ore_Count    = ctx.backpack.select().id(TIN_ORE).size();
 
-        System.out.print(" Backpack size with ");
-        System.out.print(Copper_Ore_Count);
+        /*System.out.print(Copper_Ore_Count);
         System.out.print(" Copper ore and ");
         System.out.print(Tin_Ore_Count);
-        System.out.println(" Tin ore ");
+        System.out.println(" Tin ore ");*/
 
         GameObject rock;
         if(Tin_Ore_Count == Copper_Ore_Count)

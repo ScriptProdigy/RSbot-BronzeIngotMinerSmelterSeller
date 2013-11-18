@@ -12,8 +12,6 @@ import org.powerbot.script.wrappers.GameObject;
  */
 public class Bank extends Task {
 
-    private int BANK_CHEST = 79036;
-
     public Bank(MethodContext ctx){
         super(ctx);
     }
@@ -21,19 +19,19 @@ public class Bank extends Task {
     @Override
     public boolean activate()
     {
-        System.out.print("Bank Contains Player: " );
-        System.out.println(Walk.MovementArea.BANK_CHEST_AREA.getArea().contains(ctx.players.local()));
         return Walk.MovementArea.BANK_CHEST_AREA.getArea().contains(ctx.players.local());
     }
 
     @Override
     public void execute()
     {
-        GameObject chest = ctx.objects.select().id(BANK_CHEST).poll();
-        chest.interact("Use");
-
-        ctx.bank.depositInventory();
-        //Component SelectBronze = ctx.widgets.get(762, 54).getChild(0);
-        //SelectBronze.interact("Deposit-All");
+        if(ctx.bank.isOpen())
+        {
+            ctx.bank.depositInventory();
+            sleep(200, 500);
+            ctx.bank.close();
+        } else {
+            ctx.bank.open();
+        }
     }
 }

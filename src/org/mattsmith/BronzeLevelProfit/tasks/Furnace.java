@@ -23,10 +23,8 @@ public class Furnace extends Task {
     @Override
     public boolean activate()
     {
-        ctx.backpack.select();
-        boolean CopperCount = ctx.backpack.id(Mine.COPPER_ORE).size() > 0;
-        ctx.backpack.select();
-        boolean TinCount = ctx.backpack.id(Mine.TIN_ORE).size() > 0;
+        boolean CopperCount = ctx.backpack.select().id(Mine.COPPER_ORE).size() > 0;
+        boolean TinCount = ctx.backpack.select().id(Mine.TIN_ORE).size() > 0;
 
         return CopperCount && TinCount;
     }
