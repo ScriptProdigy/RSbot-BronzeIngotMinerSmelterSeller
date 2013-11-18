@@ -22,8 +22,8 @@ public class Bank extends Task {
     public boolean activate()
     {
         System.out.print("Bank Contains Player: " );
-        System.out.println(Walk.Movement_Area.BANK_CHEST_AREA.getArea().contains(ctx.players.local()));
-        return Walk.Movement_Area.BANK_CHEST_AREA.getArea().contains(ctx.players.local());
+        System.out.println(Walk.MovementArea.BANK_CHEST_AREA.getArea().contains(ctx.players.local()));
+        return Walk.MovementArea.BANK_CHEST_AREA.getArea().contains(ctx.players.local());
     }
 
     @Override

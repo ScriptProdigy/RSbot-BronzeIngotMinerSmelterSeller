@@ -6,6 +6,7 @@ import org.powerbot.script.util.Random;
 import org.mattsmith.BronzeLevelProfit.tasks.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,19 +18,19 @@ import java.util.ArrayList;
 @Manifest(name = "MattSmiths Profit Miner", authors = "MattSmith", description = "Mine shit hell yea money oh hell yea")
 public class MinerProfiting extends PollingScript {
 
-    private final ArrayList<ArrayList<Task>> BotProcesses = new ArrayList();
+    private final LinkedList<LinkedList<Task>> BotProcesses = new LinkedList();
 
     public MinerProfiting()
     {
-        ArrayList<Task> MiningAndSmelting = new ArrayList();
-        MiningAndSmelting.add(new Walk(ctx, Walk.Movement_Path.LUMBRIDGE_BANK_TO_MINE));
+        LinkedList<Task> MiningAndSmelting = new LinkedList();
+        MiningAndSmelting.add(new Walk(ctx, Walk.MovementPath.LUMBRIDGE_BANK_TO_MINE));
         MiningAndSmelting.add(new Mine(ctx));
-        MiningAndSmelting.add(new Walk(ctx, Walk.Movement_Path.LUMBRIDGE_MINE_TO_FURNACE));
+        MiningAndSmelting.add(new Walk(ctx, Walk.MovementPath.LUMBRIDGE_MINE_TO_FURNACE));
         MiningAndSmelting.add(new Furnace(ctx));
-        MiningAndSmelting.add(new Walk(ctx, Walk.Movement_Path.LUMBRIDGE_FURNACE_TO_BANK));
+        MiningAndSmelting.add(new Walk(ctx, Walk.MovementPath.LUMBRIDGE_FURNACE_TO_BANK));
         MiningAndSmelting.add(new Bank(ctx));
 
-        ArrayList<Task> GrandExchangeSelling = new ArrayList();
+        LinkedList<Task> GrandExchangeSelling = new LinkedList();
         //TODO:  Implement walking to and back from GrandExchange, as well as Exchanging..
 
         BotProcesses.add(MiningAndSmelting);
@@ -46,7 +47,7 @@ public class MinerProfiting extends PollingScript {
 
     @Override
     public int poll() {
-        for(final ArrayList<Task> BotProcess : BotProcesses)
+        for(final LinkedList<Task> BotProcess : BotProcesses)
         {
             for(final Task task : BotProcess)
             {

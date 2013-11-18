@@ -27,7 +27,7 @@ public class Mine extends Task {
     {
         ctx.backpack.select();
         return ctx.backpack.size() < 28
-            && Walk.Movement_Area.MINE_AREA.getArea().contains(ctx.players.local())
+            && Walk.MovementArea.MINE_AREA.getArea().contains(ctx.players.local())
             && (!ctx.objects.select().id(COPPER_ROCK).nearest().first().isEmpty()
                 || !ctx.objects.select().id(TIN_ROCK).nearest().first().isEmpty());
     }

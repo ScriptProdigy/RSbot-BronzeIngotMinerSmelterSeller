@@ -14,7 +14,7 @@ import org.powerbot.script.wrappers.TilePath;
  */
 public class Walk extends Task {
 
-    public static enum Movement_Area {
+    public static enum MovementArea {
 
         MINE_AREA(new Area(new Tile[] { new Tile(3229, 3153, 0), new Tile(3228, 3153, 0), new Tile(3227, 3152, 0),
                 new Tile(3226, 3152, 0), new Tile(3225, 3152, 0), new Tile(3224, 3151, 0),
@@ -39,7 +39,7 @@ public class Walk extends Task {
                 new Tile(3211, 3255, 0), new Tile(3211, 3256, 0), new Tile(3211, 3257, 0)}));
 
         private Area area;
-        private Movement_Area(Area area) {
+        private MovementArea(Area area) {
             this.area = area;
         }
 
@@ -48,7 +48,7 @@ public class Walk extends Task {
         }
     }
 
-    public static enum Movement_Path {
+    public static enum MovementPath {
 
         LUMBRIDGE_MINE_TO_FURNACE(new Tile[] { new Tile(3231, 3150, 0), new Tile(3235, 3153, 0), new Tile(3237, 3157, 0),
                 new Tile(3239, 3162, 0), new Tile(3241, 3167, 0), new Tile(3242, 3172, 0),
@@ -95,7 +95,7 @@ public class Walk extends Task {
         LUMBRIDGE_GE_TO_BANK(new Tile[] {} );
 
         private Tile[] path;
-        private Movement_Path(Tile[] path){
+        private MovementPath(Tile[] path){
             this.path = path;
         }
 
@@ -115,9 +115,9 @@ public class Walk extends Task {
         return reversedData;
     }
 
-    private Movement_Path Path;
+    private MovementPath Path;
 
-    public Walk(MethodContext ctx, Movement_Path path){
+    public Walk(MethodContext ctx, MovementPath path){
         super(ctx);
         this.Path = path;
     }
@@ -130,28 +130,28 @@ public class Walk extends Task {
         System.out.print("Backpack Size: ");
         System.out.println(BackpackSize);
 
-        if(Path == Movement_Path.LUMBRIDGE_MINE_TO_FURNACE)
+        if(Path == MovementPath.LUMBRIDGE_MINE_TO_FURNACE)
         {
-            System.out.println("Movement_Path.LUMBRIDGE_MINE_TO_FURNACE");
-            if(BackpackSize < 28 || Movement_Area.FURNACE_AREA.getArea().contains(ctx.players.local())) {
+            System.out.println("MovementPath.LUMBRIDGE_MINE_TO_FURNACE");
+            if(BackpackSize < 28 || MovementArea.FURNACE_AREA.getArea().contains(ctx.players.local())) {
                 return false;
             }
             return true;
         }
 
-        if(Path == Movement_Path.LUMBRIDGE_BANK_TO_MINE)
+        if(Path == MovementPath.LUMBRIDGE_BANK_TO_MINE)
         {
-            System.out.println("Movement_Path.LUMBRIDGE_BANK_TO_MINE");
-            if(BackpackSize > 0 || Movement_Area.MINE_AREA.getArea().contains(ctx.players.local())) {
+            System.out.println("MovementPath.LUMBRIDGE_BANK_TO_MINE");
+            if(BackpackSize > 0 || MovementArea.MINE_AREA.getArea().contains(ctx.players.local())) {
                 return false;
             }
             return true;
         }
 
-        if(Path == Movement_Path.LUMBRIDGE_FURNACE_TO_BANK)
+        if(Path == MovementPath.LUMBRIDGE_FURNACE_TO_BANK)
         {
-            System.out.println("Movement_Path.LUMBRIDGE_FURNACE_TO_BANK");
-            if(Movement_Area.FURNACE_AREA.getArea().contains(ctx.players.local()))
+            System.out.println("MovementPath.LUMBRIDGE_FURNACE_TO_BANK");
+            if(MovementArea.FURNACE_AREA.getArea().contains(ctx.players.local()))
             {
                 boolean CopperCount = ctx.backpack.select().id(Mine.COPPER_ORE).size() == 0;
                 boolean TinCount = ctx.backpack.select().id(Mine.TIN_ORE).size() == 0;
