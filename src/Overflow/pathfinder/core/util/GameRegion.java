@@ -18,7 +18,7 @@ import java.util.zip.ZipFile;
  */
 public class GameRegion {
 
-    private static final String DOWNLOAD_URL = "https://github.com/Overflow-Powerbot/Pathfinder/raw/master/MapData.zip";
+    private static final String DOWNLOAD_URL = "http://github.com/Overflow-Powerbot/Pathfinder/raw/master/MapData.zip";
 
     private static final File DIRECTORY = new File(System.getProperty("java.io.tmpdir") + File.separator + "RSPathfinderCache");
     private static final File ZIPPED = new File(DIRECTORY, "MapData.zip");

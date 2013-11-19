@@ -117,6 +117,8 @@ public class Walk extends Task {
 
     private MovementPath Path;
 
+
+
     public Walk(MethodContext ctx, MovementPath path){
         super(ctx);
         this.Path = path;

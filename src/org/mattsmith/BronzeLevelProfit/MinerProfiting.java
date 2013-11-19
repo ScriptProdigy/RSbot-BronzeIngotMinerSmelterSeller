@@ -1,11 +1,14 @@
 package org.mattsmith.BronzeLevelProfit;
 
+import Overflow.pathfinder.core.util.Structure;
+import Overflow.pathfinder.impl.Pathfinder;
 import org.powerbot.script.Manifest;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.util.Random;
 import org.mattsmith.BronzeLevelProfit.tasks.*;
+import org.powerbot.script.wrappers.Tile;
+import org.powerbot.script.wrappers.TilePath;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -21,6 +24,10 @@ public class MinerProfiting extends PollingScript {
     private final LinkedList<Task> BotProcesses = new LinkedList<Task>();
     private final LinkedList<Task> GrandExchangeProcesses = new LinkedList<Task>();
     private int BankedCount = 0;
+    private boolean MovedToStartPosition = false;
+
+    private Pathfinder pathToStart = new Pathfinder();
+    private TilePath runToStart = null;
 
     public MinerProfiting()
     {
@@ -38,8 +45,8 @@ public class MinerProfiting extends PollingScript {
 
     @Override
     public void start() {
-        //TODO:  PathFind my way to the mine at start
         //TODO:  Check to see if backpack is empty at start, if not empty at bank then start BotProcesses
+
 
         System.out.println("Script started");
     }
@@ -59,19 +66,51 @@ public class MinerProfiting extends PollingScript {
         return 0;
     }
 
+    private Tile toTile(int hash) {
+        return new Tile(Structure.TILE.getX(hash), Structure.TILE.getY(hash), Structure.TILE.getZ(hash));
+    }
+
+    private org.powerbot.script.wrappers.TilePath toPath(final Overflow.pathfinder.core.wrapper.TilePath tp)
+    {
+        Tile[] arr = new Tile[tp.size()];
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = toTile(tp.get(i).getHash());
+        }
+        return ctx.movement.newTilePath(arr);
+    }
+
     @Override
     public int poll()
     {
-        if(BankedCount != 0 && (BankedCount%5) == 0) {
-            if(actProcessList(GrandExchangeProcesses) == 1) {
-                BankedCount = 0;
+        if(MovedToStartPosition == false)
+        {
+            System.out.println("Walking to start.. ");
+            Tile pLocation = ctx.players.local().getLocation();
+
+            if(!Walk.MovementArea.BANK_CHEST_AREA.getArea().contains(ctx.players.local()))
+            {
+                if(runToStart == null) {
+                    runToStart = toPath(pathToStart.findPath(Structure.TILE.getHash(pLocation.x, pLocation.y, pLocation.plane), Structure.TILE.getHash(3214, 3257, 0), 500, false));
+                }
+
+                runToStart.traverse();
+                sleep(Random.nextInt(1000,2000));
+
+            } else {
+                System.out.println("At start! Beginning.. ");
+                MovedToStartPosition = true;
             }
         } else {
-            if(actProcessList(BotProcesses) == 1) {
-                BankedCount += 1;
+            if(BankedCount != 0 && (BankedCount%5) == 0) {
+                if(actProcessList(GrandExchangeProcesses) == 1) {
+                    BankedCount = 0;
+                }
+            } else {
+                if(actProcessList(BotProcesses) == 1) {
+                    BankedCount += 1;
+                }
             }
         }
-
         return 0;
     }
 
